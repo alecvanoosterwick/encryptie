@@ -1,5 +1,4 @@
-﻿using Encryptie.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -10,19 +9,18 @@ namespace Encryptie.Services
 {
     public interface IEncryption
     {
-        public string Encrypt();
-        public string Decrypt();
+        public string Encrypt(string tekst);
+        public string Decrypt(string tekst);
     }
     public class EncryptionService : IEncryption
     {
         private readonly IConfiguration _configuration;
         private readonly static string key = "1234567891234567";
-        public Bericht bericht = new Bericht();
         public EncryptionService(IConfiguration configuration)
         {
-
+            _configuration = configuration;
         }
-        public string Encrypt()
+        public string Encrypt(string tekst)
         {
             byte[] iv = new byte[16];
             byte[] array;
@@ -37,7 +35,7 @@ namespace Encryptie.Services
                     {
                         using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
                         {
-                            streamWriter.Write(bericht.text);
+                            streamWriter.Write(tekst);
                         }
                         array = ms.ToArray();
                     }
@@ -45,10 +43,10 @@ namespace Encryptie.Services
             }
             return Convert.ToBase64String(array);
         }
-        public string Decrypt()
+        public string Decrypt(string tekst)
         {
             byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(bericht.text);
+            byte[] buffer = Convert.FromBase64String(tekst);
             using (Aes aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
