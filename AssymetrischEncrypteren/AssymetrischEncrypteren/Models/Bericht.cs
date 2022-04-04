@@ -6,7 +6,7 @@ namespace AssymetrischEncrypteren.Models
     {
         public string bericht { get; set; } = string.Empty;
         public string encryptedBericht { get; set; } = string.Empty;
-        public RSAParameters _privatekey;
-        public RSAParameters _publickey;
+        //public RSAParameters _privatekey;
+        //public RSAParameters _publickey;
     }
 }

@@ -9,7 +9,6 @@ namespace AssymetrischEncrypteren.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static Bericht b = new Bericht();
         private IAssymetrischService _eService;
 
         public AuthController(IAssymetrischService encryptionService)
@@ -18,12 +17,12 @@ namespace AssymetrischEncrypteren.Controllers
 
         }
 
-        [HttpGet]// gaat moeten Encrypteren
+        [HttpPost]// gaat moeten Encrypteren
         [Route("Encrypteer")]
 
-        public string Encrypteer(Bericht b)
+        public string Encrypteer(string bericht)
         {
-            string encryptString = _eService.Encrypt(b.bericht);
+            string encryptString = _eService.Encrypt(bericht);
             return encryptString;
         }
        
@@ -31,9 +30,9 @@ namespace AssymetrischEncrypteren.Controllers
         [HttpGet]// gaat moeten Decrypteren
         [Route("Decrypteer")]
 
-        public string Decrypteer()
+        public string Decrypteer(string encryptedBericht)
         {
-            string decryptString = _eService.Decrypt(b.bericht);
+            string decryptString = _eService.Decrypt(encryptedBericht);
             return decryptString;
         }
     }
