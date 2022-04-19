@@ -20,3 +20,63 @@ encryptor = message => {
         
     }
 }
+
+// encrypteren hash variabelen
+
+const crypto = require("crypto");
+
+const algorithm = "aes-192-cbc"; //algorythme waar we mee gaan encrypteren
+const password = "Password used to generate key";
+const salt = "salt";
+const key = crypto.scryptSync(password,salt,24);
+const iv = crypto.randomBytes(16);// random 1 keer code;
+const cipher = crypto.createCipheriv(algorithm,key,iv);
+
+let cipher_text;
+
+const decipher = crypto.createDecipheriv(algorithm,key,iv);
+
+//functies encrypteren
+
+function Encrypteren(){
+  const message = "hallo";
+
+  cipher.on('readable',() => {
+
+    let cipherText = cipher.read();
+
+    if(cipherText){
+      cipher_text = cipherText.toString("hex");
+
+    };
+  });
+  cipher.write(message);
+  cipher.end();
+
+};
+
+function Decrypteren(){
+
+  decipher.on('readable',() => {
+
+      let plainText = decipher.read();
+
+      if(_plain_text){
+
+          console.log(plainText.toString('utf8'));
+
+      };
+
+  });
+
+  decipher.write(cipherText,'hex');
+
+  decipher.end();
+
+};
+function showEncrypt(){
+  console.log(Encrypteren());
+};
+function showDecrypt(){
+  console.log(Decrypteren());
+};
