@@ -1,11 +1,12 @@
 var encryptionkey = CryptoJS.enc.Hex.parse('0123456789abcdef0123456789abcdef')
+console.log(encryptionkey);
 const iv = CryptoJS.enc.Hex.parse('fedcba0987654321fedcba0987654321');
 
 function encrypteer() {
-  var key = getRanHex(32);
+  var key = CryptoJS.enc.Hex.parse(getRanHex(32));
   var msg = document.getElementById("text").value;
 
-  const enc = CryptoJS.AES.encrypt(msg,key,{
+  var enc = CryptoJS.AES.encrypt(msg,key,{
     iv,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
@@ -13,6 +14,7 @@ function encrypteer() {
   console.log(key)
 
 console.log(enc.ciphertext.toString(CryptoJS.enc.Hex));
+document.getElementById("EncryptedValue").innerHTML = enc
 }
 
 
