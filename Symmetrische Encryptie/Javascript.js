@@ -1,7 +1,7 @@
 var encryptionkey = CryptoJS.enc.Hex.parse('0123456789abcdef0123456789abcdef')
 const iv = CryptoJS.enc.Hex.parse('fedcba0987654321fedcba0987654321');
 
-function iets() {
+function encrypteer() {
   var key = getRanHex(32);
   var msg = document.getElementById("text").value;
 
@@ -16,7 +16,7 @@ console.log(enc.ciphertext.toString(CryptoJS.enc.Hex));
 }
 
 
-function decryptIets() {
+function decrypteer() {
   var encryptedMessage = document.getElementById("EncryptedValue").innerHTML;
   var key = document.getElementById("key").innerHTML;
 
