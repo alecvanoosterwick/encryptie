@@ -1,82 +1,44 @@
-function uuidv4() {
-    return 'xxxxxxxx-xxx-xxxx-xxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) { //gaat alle x veranderen 
-      var random = Math.random() * 16 | 0, v = c == 'x' ? random : (random & 0x3 | 0x8);
-      return v.toString(16);
-    });
+const getRanHex = size => {
+  let result = [];
+  let hexRef = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
+
+  for (let i = 0; i < size; i++) {
+    result.push(hexRef[Math.floor(Math.random() * 16)]);
   }
-  function GenerateUniqueKey(){
-      return console.log(uuidv4());
+  return result.join('');
+}
+//dit maakt een random 16 bit hexa getal aan. Die we nodig hebben voor een random Encryptie sleutel
+
+var key = CryptoJS.enc.Hex.parse(getRanHex(32));
+const iv = CryptoJS.enc.Hex.parse('fedcba0987654321fedcba0987654321');
+
+function encrypteer() {
+  
+  var msg = document.getElementById("text").value;
+
+  var enc = CryptoJS.AES.encrypt(msg,key,{
+    iv,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  console.log(key)
+  document.getElementById("EncryptedValue").innerHTML = enc //gaat het geëncypteerd bericht tonen
+  document.getElementById("key").innerHTML = key //gaat het encryptiesleutel tonen
 }
 
-encryptor = message => {
-    let encryptedMessage;
+function decrypteer() {
+  var encryptedMessage = document.getElementById("EncryptedValue").innerHTML;
+  var key = document.getElementById("key").innerHTML;
 
-    const messageArr = message.split(""); //gaat elke letter gaan splitten en elke letter word in de array gestoken
-    console.log("message array", messageArr)
-
-    let encryptedMessageArr = [];
-
-    for(i = 0; i < messageArr.length; i++){
-        
-    }
+  var decrypt = CryptoJS.AES.decrypt(encryptedMessage,key)
+    .toString(CryptoJS.enc.Utf8) //zet het Geëncrypteerd bericht terug om naar een string
+  document.getElementById("decrypted").innerHTML = decrypted;//toont het bericht
+  
 }
 
-// encrypteren hash variabelen
 
-const crypto = require("crypto");
 
-const algorithm = "aes-192-cbc"; //algorythme waar we mee gaan encrypteren
-const password = "Password used to generate key";
-const salt = "salt";
-const key = crypto.scryptSync(password,salt,24);
-const iv = crypto.randomBytes(16);// random 1 keer code;
-const cipher = crypto.createCipheriv(algorithm,key,iv);
 
-let cipher_text;
 
-const decipher = crypto.createDecipheriv(algorithm,key,iv);
-
-//functies encrypteren
-
-function Encrypteren(){
-  const message = "hallo";
-
-  cipher.on('readable',() => {
-
-    let cipherText = cipher.read();
-
-    if(cipherText){
-      cipher_text = cipherText.toString("hex");
-
-    };
-  });
-  cipher.write(message);
-  cipher.end();
-
-};
-
-function Decrypteren(){
-
-  decipher.on('readable',() => {
-
-      let plainText = decipher.read();
-
-      if(_plain_text){
-
-          console.log(plainText.toString('utf8'));
-
-      };
-
-  });
-
-  decipher.write(cipherText,'hex');
-
-  decipher.end();
-
-};
-function showEncrypt(){
-  console.log(Encrypteren());
-};
-function showDecrypt(){
-  console.log(Decrypteren());
-};
+// wachtwoord, encrypteerd bericht slaan we op in een databank.
+// het probleem hier is dat er geen random code aangemaakt word waarmee er geëncrypteerd word.
