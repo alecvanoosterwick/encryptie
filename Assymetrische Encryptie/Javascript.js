@@ -35,12 +35,19 @@ var private_key = '-----BEGIN RSA PRIVATE KEY-----\n' +
 'bv6I4jdGVlfHH/4PPcsRcZDxiNTCtlMREbpYpNNRPI8=\n' +
 '-----END RSA PRIVATE KEY-----'
 
+console.log("dit is de private key voor" + private_key);
+console.log("dit is de public key voor" + public_key);
+
 let key_private = new NodeRSA(private_key);
 let key_public = new NodeRSA(public_key);
 
-//pk voor encryptie
+console.log("dit is de private key na" + key_private);
+console.log("dit is de public key na" + key_public);
+
+//pubk voor encryptie
 var encryptedString = key_public.encrypt(message,'base64');
 console.log(encryptedString);
 
+//privk voor decryptie
 var decryptedString = key_private.decrypt(encryptedString,'utf8');
 console.log(decryptedString);
