@@ -20,4 +20,22 @@ function createLicense(mail) {
         );
     return encrypted;
 }
-console.log(createLicense("a@example.com"));
+console.log(createLicense("iets"));
+
+function CheckValidity(licence){
+    const decrypted = publicKey.decryptPublic(licence,"utf8")
+
+    if("hierkomteenrandomstring123456789ietshierkomteenrandomstring987654321" == decrypted){
+    return true
+    }
+    else{
+        return false
+    }
+    
+}
+console.log(
+    CheckValidity(
+        "tfR6XEBI0oLO3GCIzH8E+UtreIhqZo6DPA31impWZpROTLJQaHdSa9vL2cEIzLuAEPVCzvR7jfI9f3q/mYAjSWl/cuLlouK8RNYy6UtaNS7oyN9QAm97313TX+lHzH6usJPDK0sc4fgCPPcQ7XGpINCWGxtMMXOT0JuddmAROM/wNx9XOdCZu6Baf3Up7wv9nrB1GqawJQEYHyPUiOjcbOMBL63PioyowmtUERdF/P9SCwaOyVOIg5ZOWqqLPv8XkqR+AH3bRO6kv4vnEppQUfxJtDfRIeJrfTwmRO+PDO9l5tnUHdAbPEQB7U5LD5obpFuIQbpz4dF2SGBjjP1UA=="
+                 )
+            );
+    
