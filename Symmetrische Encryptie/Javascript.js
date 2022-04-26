@@ -32,7 +32,7 @@ function decrypteer() {
 
   var decrypt = CryptoJS.AES.decrypt(encryptedMessage,key)
     .toString(CryptoJS.enc.Utf8) //zet het Geëncrypteerd bericht terug om naar een string
-  document.getElementById("decrypted").innerHTML = "decrypt";//toont het bericht
+  document.getElementById("decrypted").innerHTML = decrypt;//toont het bericht
   
 }
 
