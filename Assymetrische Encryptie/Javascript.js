@@ -15,6 +15,7 @@ var private = fs.readFileSync("./Keys/private.pem","utf8"); //dit gaat de privat
 publicKey.importKey(public); //vult de lege key in 
 privateKey.importKey(private);
 
+console.log(private)
 //pubk voor encryptie
 var encryptedString = publicKey.encrypt(message,'base64');
 console.log(encryptedString);
