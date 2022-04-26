@@ -10,6 +10,9 @@ var private = fs.readFileSync("./Keys/private.pem","utf8");
 publicKey.importKey(public);
 privateKey.importKey(private);
 
+console.log(publicKey);
+console.log(privateKey);
+
 function createLicense(mail) {
     const saltFirst = "hierkomteenrandomstring123456789";
     const saltSecond = "hierkomteenrandomstring987654321";
