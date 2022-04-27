@@ -4,6 +4,8 @@ function encrypteer() {
   var key = CryptoJS.enc.Hex.parse(getRanHex(32));
 
   var msg = document.getElementById("text").value;
+  console.log("this is the message: " + msg)
+  console.log(key)
 
   var enc = CryptoJS.AES.encrypt(msg,key,{
     iv,
@@ -21,7 +23,6 @@ function decrypteer() {
 
   var decrypt = CryptoJS.AES.decrypt(encryptedMessage,hexkey);
   document.getElementById("decrypted").innerHTML = decrypt;//toont het bericht
-  console.log(decrypt)
   
 }
 
@@ -41,7 +42,7 @@ function stringToHex(key){
   for (let i = 0; i < key.length; i++) {
     result.push(key[i] = " " + key[i]);
   }
-  console.log(result)
+  console.log("Dit is de sleutel waar men mee gaat encrypteren: " + result)
 
   return result.join('');
 }
